@@ -87,7 +87,8 @@ export class AppComponent {
   }
 
   launchMapUrl(parameter) {
-    window.open('https://www.google.com/maps/search/?api=1&query=' + parameter.split(' ').join('+'));
+    window.open('https://www.google.ca/maps/dir/' + this.lat + ',' + this.lng + '/' + parameter.split(' ').join('+'));
+    //window.open('https://www.google.com/maps/search/?api=1&query=' + parameter.split(' ').join('+'));
   }
 
   searchGoogle(parameter) {
