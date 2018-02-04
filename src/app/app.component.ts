@@ -16,13 +16,22 @@ export class AppComponent {
   autoTicks = false;
   disabled = false;
   invert = false;
-  max = 5000;
-  min = 0;
+  max = 25;
+  min = 0.5;
   showTicks = false;
-  step = 1;
+  step = 0.5;
   thumbLabel = false;
-  radius = 500;
+  radius = 1;
   vertical = false;
+  states = {
+    START:"What do you feel like eating today?",
+    CHECK:"Let me see what I can find.",
+    FOUND:"I found the following results, let me know if you would like anything else!",
+    UNSURE:"Sorry, I could not find any results from that, try typing specific food words this time like 'Pizza' for example.",
+    ERROR:"Something went wrong, try again in a little bit."
+}
+  chatbot = this.states.START;
+
 
   descendingRating = true;
   ascendingDistance = true;
@@ -47,7 +56,18 @@ export class AppComponent {
       "lat":"45.5036174", 
       "lng":"-73.5798482"
     },
-    "radius": 1000
+    "radius": 1
+  
+  }
+
+  convo = {
+  
+    "conversation": "",
+    "location": {
+      "lat":"45.5036174", 
+      "lng":"-73.5798482"
+    },
+    "radius": 1
   
   }
 
@@ -137,19 +157,57 @@ export class AppComponent {
     }
   }
 
+  chat() {
+    if (this.chatbot === this.states.START){
+      this.conversate();
+    } else if (this.chatbot === this.states.CHECK) {
+      this.chatbot = this.states.FOUND;
+    } else if (this.chatbot === this.states.FOUND) {
+      this.conversate();
+    } else if (this.chatbot === this.states.UNSURE) {
+      this.searchFood();
+    } else if (this.chatbot === this.states.ERROR) {
+      this.chatbot = this.states.START;
+      this.conversate();
+    } else {
+      alert('Something went seriously wrong')
+    }
+  }
+
   searchFood() {
     this.restaurant.foodWords = [];
     let foodWords = this.food.split(",");
     foodWords.forEach(food => {
       this.restaurant.foodWords.push(food);
     })
-    this.restaurant.radius = this.radius;
+    this.restaurant.radius = this.radius * 1000;
     this.restaurant.location.lat = this.lat;
     this.restaurant.location.lng = this.lng;
 
     this.http.post('http://sate.us-west-2.elasticbeanstalk.com/api/food/insert/', this.restaurant).map(res => res.json()).subscribe(data => {
-      if (data.length == 0) alert("No restaurants found! Try increasing the radius.");
+      if (data.length == 0) this.chatbot = this.states.ERROR;
       else {
+        this.chatbot = this.states.FOUND
+        this.list = data;
+        this.listAvailable = true;
+        console.log(data);
+      }
+    }, err => {
+      this.listAvailable = false;
+      console.log(err);
+    });
+  }
+
+  conversate() {
+    this.convo.conversation = this.food;
+    this.convo.radius = this.radius * 1000;
+    this.convo.location.lat = this.lat;
+    this.convo.location.lng = this.lng;
+
+    this.http.post('http://sate.us-west-2.elasticbeanstalk.com/api/food/textConversation/', this.convo).map(res => res.json()).subscribe(data => {
+      if (data.length == 0) this.chatbot = this.states.UNSURE;
+      else {
+        this.chatbot = this.states.FOUND
         this.list = data;
         this.listAvailable = true;
         console.log(data);

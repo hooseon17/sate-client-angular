@@ -2,10 +2,10 @@
   <header id="showcase" class="grid">
       <div class="bg-image"></div>
       <div class="content-wrap">
-          <h1>Sate</h1>
-          <p>Find what you want</p>
-          <input [(ngModel)]="food" placeholder="Search For Food..." id="first_name" type="text" class="validate">
-          <div>Radius<mat-slider [disabled]="disabled"
+          <img border="0" alt="SATE" src="../assets/SATE_LOGO.png" width="45%" height="45%" />
+          <p><strong>{{chatbot}}</strong></p>
+          <input [(ngModel)]="food" placeholder="I would like to eat..." id="first_name" type="text" class="validate" (keyup.enter)="chat()">
+          <div><mat-slider [disabled]="disabled"
             [invert]="invert"
             [max]="max"
             [min]="min"
@@ -13,9 +13,11 @@
             [thumb-label]="thumbLabel"
             [tick-interval]="tickInterval"
             [(ngModel)]="radius"
-            [vertical]="vertical"></mat-slider>{{radius}} m</div>
-          <a href="#showcase" class="waves-effect waves-light btn orange" (click)="searchFood()">Search</a>
+            [vertical]="vertical"></mat-slider></div>
+          <p>Within {{radius}} km</p>
+          <a href="#showcase" class="waves-effect waves-light btn orange" (click)="chat()">Search</a>
       </div>
+      
   </header>
   
   <div *ngIf="listAvailable" id="section-a">
@@ -54,7 +56,7 @@
   </div>
 
   <footer id="main-footer" class="grid">
-      <div>Contact us: SateMchacks@gmail.com</div>
+      <div>SateMchacks@gmail.com</div>
       <div>Project By H&M</div>
   </footer>
   
