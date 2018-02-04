@@ -15,7 +15,7 @@
             [(ngModel)]="radius"
             [vertical]="vertical"></mat-slider></div>
           <p>Within {{radius}} km</p>
-          <a href="#showcase" class="waves-effect waves-light btn orange" (click)="chat()">Search</a>
+          <a href="#showcase" class="waves-effect waves-light btn orange darken-2" (click)="chat()">Search</a>
       </div>
       
   </header>
@@ -32,8 +32,8 @@
           </agm-info-window>
         </agm-marker>
     </agm-map>
-    <table  class="bordered highlight">
-      <thead>
+    <table class="bordered grey darken-3">
+      <thead style="background:#FF8300">
         <tr>
             <th>Name</th>
             <th>Location</th>
@@ -44,7 +44,7 @@
       </thead>
   
       <tbody>
-        <tr *ngFor="let n of list" style="cursor: pointer;" (click)="launchMapUrl(n.location)">
+        <tr *ngFor="let n of list" style="cursor: pointer; color:#fff" (click)="launchMapUrl(n.location)">
           <td>{{n.name}}</td>
           <td>{{n.location}}</td>
           <td>{{n.distance}} m</td>
