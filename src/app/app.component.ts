@@ -14,7 +14,7 @@ export class AppComponent {
   food: string;
   restaurant = {
   
-    "foodWords": ["pepperoni pizza","sushi","kimchi"],
+    "foodWords": [],
     "location": {
       "lat":"45.5036174", 
       "lng":"-73.5798482"
@@ -39,6 +39,11 @@ export class AppComponent {
   }
 
   searchFood() {
+    this.restaurant.foodWords = [];
+    let foodWords = this.food.split(",");
+    foodWords.forEach(food => {
+      this.restaurant.foodWords.push(food);
+    })
     this.http.post('http://sate.us-west-2.elasticbeanstalk.com/api/food/insert/', this.restaurant).map(res => res.json()).subscribe(data => {
       this.list = data;
       this.listAvailable = true;
