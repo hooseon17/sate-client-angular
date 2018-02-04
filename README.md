@@ -1,5 +1,9 @@
 <img border="0" alt="SATE" src="https://github.com/hooseon17/sate-client-angular/blob/master/src/assets/SATE_LOGO_DARK.png" width="18%" height="18%" />
 
+## Index
+* [SATE Server](https://github.com/MajeedMirza/Sate-Server)
+* [SATE Mobile App](https://github.com/hooseon17/sate-client-ionic)
+
 ## Inspiration
 The goal was to build an app to help out friends by making the process of selecting a restaurant a lot easier. 
 
@@ -26,7 +30,3 @@ The main functionality of **SATE** works and works well. Now that it is up and r
 ## What's next for SATE
 * Completing voice to text is the main goal
 * Fully deploying the front-end (app-store and domain)
-
-[SATE Mobile App](https://github.com/hooseon17/sate-client-ionic)
-
-[SATE Server](https://github.com/MajeedMirza/Sate-Server)
