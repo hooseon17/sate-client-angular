@@ -26,6 +26,7 @@ export class AppComponent {
 
   descendingRating = true;
   ascendingDistance = true;
+  descendingOpen = true;
 
   get tickInterval(): number | 'auto' {
     return this.showTicks ? (this.autoTicks ? 'auto' : this._tickInterval) : 0;
@@ -82,13 +83,17 @@ export class AppComponent {
     if (option == "rating") {
       if (this.descendingRating) {
         this.list.sort(function(a, b){
-          return b.rating - a.rating;
+          if(a.rating > b.rating) return -1;
+          if(a.rating < b.rating) return 1;
+          return 0;
         });
         this.descendingRating = false;
       }
       else {
         this.list.sort(function(a, b){
-          return a.rating - b.rating;
+          if(a.rating < b.rating) return -1;
+          if(a.rating > b.rating) return 1;
+          return 0;
         });
         this.descendingRating = true;
       }
@@ -96,17 +101,39 @@ export class AppComponent {
     else if (option == "distance") {
       if (this.ascendingDistance) {
         this.list.sort(function(a, b){
-          return a.distance - b.distance;
+          if(a.distance < b.distance) return -1;
+          if(a.distance > b.distance) return 1;
+          return 0;
         });
         this.ascendingDistance = false;
       }
       else {
         this.list.sort(function(a, b){
-          return b.distance - a.distance;
+          if(a.distance > b.distance) return -1;
+          if(a.distance < b.distance) return 1;
+          return 0;
         });
         this.ascendingDistance = true;
       }
-      
+    }
+    else if (option == "open") {
+      if (this.descendingOpen) {
+        this.list.sort(function(a, b){
+          if(a.open > b.open) return -1;
+          if(a.open < b.open) return 1;
+          return 0;
+        });
+        this.descendingOpen = false;
+        
+      }
+      else {
+        this.list.sort(function(a, b){
+          if(a.open < b.open) return -1;
+          if(a.open > b.open) return 1;
+          return 0;
+        });
+        this.descendingOpen = true;
+      }
     }
   }
 

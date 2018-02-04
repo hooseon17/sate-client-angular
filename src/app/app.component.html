@@ -3,8 +3,7 @@
       <div class="bg-image"></div>
       <div class="content-wrap">
           <h1>Sate</h1>
-          <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Voluptates dolore delectus quia iure possimus laborum expedita
-              ex inventore ea aliquid.</p>
+          <p>Find what you want</p>
           <input [(ngModel)]="food" placeholder="Search For Food..." id="first_name" type="text" class="validate">
           <div>Radius<mat-slider [disabled]="disabled"
             [invert]="invert"
@@ -36,14 +35,14 @@
         <tr>
             <th>Name</th>
             <th>Location</th>
-            <th (click)="sortRestaurants('distance')">Distance⇅</th>
-            <th (click)="sortRestaurants('rating')">Rating⇅</th>
-            <th>Open/Close</th>
+            <th style="cursor: pointer;" (click)="sortRestaurants('distance')">Distance⇅</th>
+            <th style="cursor: pointer;" (click)="sortRestaurants('rating')">Rating⇅</th>
+            <th style="cursor: pointer;" (click)="sortRestaurants('open')">Open/Close⇅</th>
         </tr>
       </thead>
   
       <tbody>
-        <tr *ngFor="let n of list" (click)="launchMapUrl(n.location)">
+        <tr *ngFor="let n of list" style="cursor: pointer;" (click)="launchMapUrl(n.location)">
           <td>{{n.name}}</td>
           <td>{{n.location}}</td>
           <td>{{n.distance}} m</td>
@@ -55,7 +54,7 @@
   </div>
 
   <footer id="main-footer" class="grid">
-      <div>Sate</div>
+      <div>Contact us: SateMchacks@gmail.com</div>
       <div>Project By H&M</div>
   </footer>
   
