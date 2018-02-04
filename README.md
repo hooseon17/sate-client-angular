@@ -1,27 +1,32 @@
-# SateClientAngular
+<img border="0" alt="SATE" src="https://github.com/hooseon17/sate-client-angular/blob/master/src/assets/SATE_LOGO_DARK.png" width="18%" height="18%" />
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 1.6.7.
+## Index
+* [SATE Mobile App](https://github.com/hooseon17/sate-client-ionic)
+* [SATE Server](https://github.com/MajeedMirza/Sate-Server)
 
-## Development server
+## Inspiration
+The goal was to build an app to help out friends by making the process of selecting a restaurant a lot easier. 
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
+## What it does
+What **SATE** does is it communicates with the user and adjusts its results until the user is satisfied with a selection. A user enters their desired cravings and **SATE** returns relevant results based on key words in the user's query. If no food words are seen, **SATE** opens its mind up to the user and allows users to teach it new food words. This way **SATE** has an ever growing database of food words.
 
-## Code scaffolding
+## How we built it
+We built **SATE** using the MEAN Stack (Mongodb, Expressjs, Angular, Node.js). The server (written in Node.js) is hosted with AWS and the mobile app is a hybrid app built using Ionic. 
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+## Challenges we ran into
+* Adding voice to text functionality (partially working)
+* Wifi issues
+* Time restrictions therefore hard to implement new technologies
+* Deployment
 
-## Build
+## Accomplishments that we're proud of
+The main functionality of **SATE** works and works well. Now that it is up and running, everyone on our team agrees that it would be a useful tool in everyday life. 
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory. Use the `-prod` flag for a production build.
+## What we learned
+* Teamwork
+* Software development flow
+* Business side of things
 
-## Running unit tests
-
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
-
-## Running end-to-end tests
-
-Run `ng e2e` to execute the end-to-end tests via [Protractor](http://www.protractortest.org/).
-
-## Further help
-
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI README](https://github.com/angular/angular-cli/blob/master/README.md).
+## What's next for SATE
+* Completing voice to text is the main goal
+* Fully deploying the front-end (app-store and domain)
