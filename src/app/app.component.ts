@@ -27,7 +27,7 @@ export class AppComponent {
     START:"What do you feel like eating today?",
     CHECK:"Let me see what I can find.",
     FOUND:"I found the following results, let me know if you would like anything else!",
-    UNSURE:"Sorry, I could not find any results from that, try typing specific food words this time like 'Pizza' for example.",
+    UNSURE:"Sorry, I could not find any results from that, try typing specific food words separated by commas like 'Pizza, chicken' for example.",
     ERROR:"Something went wrong, try again in a little bit."
 }
   chatbot = this.states.START;
@@ -172,14 +172,16 @@ export class AppComponent {
     } else {
       alert('Something went seriously wrong')
     }
+    this.food = "";
   }
 
   searchFood() {
     this.restaurant.foodWords = [];
     let foodWords = this.food.split(",");
     foodWords.forEach(food => {
-      this.restaurant.foodWords.push(food);
+      this.restaurant.foodWords.push(food.trim());
     })
+    alert(this.restaurant.foodWords)
     this.restaurant.radius = this.radius * 1000;
     this.restaurant.location.lat = this.lat;
     this.restaurant.location.lng = this.lng;
