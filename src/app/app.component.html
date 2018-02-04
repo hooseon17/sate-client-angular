@@ -44,9 +44,9 @@
       </thead>
   
       <tbody>
-        <tr *ngFor="let n of list" style="cursor: pointer; color:#fff" (click)="launchMapUrl(n.location)">
-          <td>{{n.name}}</td>
-          <td>{{n.location}}</td>
+        <tr *ngFor="let n of list" style="color:#fff">
+          <td (click)="searchGoogle(n.name)" style="cursor: pointer;">{{n.name}}</td>
+          <td (click)="launchMapUrl(n.location)" style="cursor: pointer;">{{n.location}}</td>
           <td>{{n.distance}} m</td>
           <td>{{n.rating}}/5</td>
           <td>{{n.open}}</td>

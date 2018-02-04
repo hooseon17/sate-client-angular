@@ -37,6 +37,8 @@ export class AppComponent {
   ascendingDistance = true;
   descendingOpen = true;
 
+  audio_stream: any;
+
   get tickInterval(): number | 'auto' {
     return this.showTicks ? (this.autoTicks ? 'auto' : this._tickInterval) : 0;
   }
@@ -88,15 +90,8 @@ export class AppComponent {
     window.open('https://www.google.com/maps/search/?api=1&query=' + parameter.split(' ').join('+'));
   }
 
-  getData() {
-    this.http.get('http://sate.us-west-2.elasticbeanstalk.com/api/food/insertWord/').map(res => res.json()).subscribe((data) => {
-      console.log(data);
-      this.list = data;
-      this.listAvailable = true;
-    }, err => {
-      console.log(err);
-      this.listAvailable = false;
-    })
+  searchGoogle(parameter) {
+    window.open('https://www.google.com/search?&q=' + parameter.split(' ').join('+'));
   }
 
   sortRestaurants(option) {
@@ -181,7 +176,6 @@ export class AppComponent {
     foodWords.forEach(food => {
       this.restaurant.foodWords.push(food.trim());
     })
-    alert(this.restaurant.foodWords)
     this.restaurant.radius = this.radius * 1000;
     this.restaurant.location.lat = this.lat;
     this.restaurant.location.lng = this.lng;
@@ -218,6 +212,14 @@ export class AppComponent {
       this.listAvailable = false;
       console.log(err);
     });
+  }
+
+  startRecording() {
+    navigator.getUserMedia({audio: true}, function (stream) {
+      this.audio_stream = stream;
+    }, function (e) {
+
+    })
   }
 
 
