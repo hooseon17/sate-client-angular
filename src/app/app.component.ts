@@ -24,6 +24,9 @@ export class AppComponent {
   radius = 500;
   vertical = false;
 
+  descendingRating = true;
+  ascendingDistance = true;
+
   get tickInterval(): number | 'auto' {
     return this.showTicks ? (this.autoTicks ? 'auto' : this._tickInterval) : 0;
   }
@@ -73,6 +76,38 @@ export class AppComponent {
       console.log(err);
       this.listAvailable = false;
     })
+  }
+
+  sortRestaurants(option) {
+    if (option == "rating") {
+      if (this.descendingRating) {
+        this.list.sort(function(a, b){
+          return b.rating - a.rating;
+        });
+        this.descendingRating = false;
+      }
+      else {
+        this.list.sort(function(a, b){
+          return a.rating - b.rating;
+        });
+        this.descendingRating = true;
+      }
+    }
+    else if (option == "distance") {
+      if (this.ascendingDistance) {
+        this.list.sort(function(a, b){
+          return a.distance - b.distance;
+        });
+        this.ascendingDistance = false;
+      }
+      else {
+        this.list.sort(function(a, b){
+          return b.distance - a.distance;
+        });
+        this.ascendingDistance = true;
+      }
+      
+    }
   }
 
   searchFood() {
