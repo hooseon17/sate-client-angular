@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { Http } from '@angular/http';
 import 'rxjs/add/operator/map';
+import {MatSlider} from '@angular/material';
 
 @Component({
   selector: 'app-root',
@@ -8,6 +9,29 @@ import 'rxjs/add/operator/map';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
+
+  lat: any = 45.5036174;
+  lng: any = -73.5798482;
+
+  autoTicks = false;
+  disabled = false;
+  invert = false;
+  max = 5000;
+  min = 0;
+  showTicks = false;
+  step = 1;
+  thumbLabel = false;
+  radius = 500;
+  vertical = false;
+
+  get tickInterval(): number | 'auto' {
+    return this.showTicks ? (this.autoTicks ? 'auto' : this._tickInterval) : 0;
+  }
+  set tickInterval(v) {
+    this._tickInterval = Number(v);
+  }
+  private _tickInterval = 1;
+
   title = 'app';
   list: any;
   listAvailable = false;
@@ -24,7 +48,20 @@ export class AppComponent {
   }
 
   constructor(private http: Http) {
-    
+    this.getLocation();
+  }
+
+  getLocation() {
+    navigator.geolocation.getCurrentPosition(this.showPosition.bind(this));
+  }
+
+  showPosition(position) {
+    this.lat = position.coords.latitude;
+    this.lng = position.coords.longitude;
+  }
+
+  launchMapUrl(parameter) {
+    window.open('https://www.google.com/maps/search/?api=1&query=' + parameter.split(' ').join('+'));
   }
 
   getData() {
@@ -44,10 +81,17 @@ export class AppComponent {
     foodWords.forEach(food => {
       this.restaurant.foodWords.push(food);
     })
+    this.restaurant.radius = this.radius;
+    this.restaurant.location.lat = this.lat;
+    this.restaurant.location.lng = this.lng;
+
     this.http.post('http://sate.us-west-2.elasticbeanstalk.com/api/food/insert/', this.restaurant).map(res => res.json()).subscribe(data => {
-      this.list = data;
-      this.listAvailable = true;
-      console.log(data);
+      if (data.length == 0) alert("No restaurants found! Try increasing the radius.");
+      else {
+        this.list = data;
+        this.listAvailable = true;
+        console.log(data);
+      }
     }, err => {
       this.listAvailable = false;
       console.log(err);

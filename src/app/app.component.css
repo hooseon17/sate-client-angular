@@ -1,3 +1,11 @@
+.mat-slider-horizontal {
+    width: 75%;
+}
+
+agm-map {
+    height: 300px;
+}
+
 /* Core Styles */
 
 body {
@@ -27,25 +35,6 @@ p {
     margin: 0;
     padding: 1em 0;
 }
-
-/* .btn {
-    display: inline-block;
-    background: #FF8300;
-    color: #fff;
-    text-decoration: none;
-    padding: 1em 2em;
-    border: none;
-    margin: .5em 0;
-    transition: background 1s, color 1s;
-} */
-
-.btn:hover {
-    background: #eaeaea;
-    color: #333;
-}
-
-
-/* Header Showcase */
 
 #showcase {
     min-height: 40rem; 
@@ -84,53 +73,9 @@ p {
 }
 
 
-/* Section B */
-
-#section-b {
-    padding: 2em 1em 1em;
-}
-
-#section-b ul {
-    list-style: none;
-    margin: 0;
-    padding: 0;
-}
-
-#section-b li {
-    margin-bottom: 1em;
-    background: #fff;
-    color: #333;
-}
-
-#section-b img {
-    height: auto;
-    width: 100%;
-}
-
-.card-content {
-    padding: 1.5em;
-}
 
 
-/* Section C */
 
-#section-c {
-    background: #fff;
-    color: #333;
-    padding: 2em;
-}
-
-
-/* Section D / Boxes */
-
-#section-d .box {
-    padding: 2em;
-    color: #fff;
-}
-
-#section-d .box:first-child {
-    background: #FF8300;
-}
 
 
 /* Footer */
@@ -157,19 +102,11 @@ p {
     #section-a .content-text p {
         padding-top: 0;
     }
-    .content-wrap,
-    #section-b ul {
+    .content-wrap {
         grid-column: 2/4;
     }
     .box,
     #main-footer div {
         grid-column: span 2;
-    }
-    #section-b ul {
-        display: flex;
-        justify-content: space-around;
-    }
-    #section-b li {
-        width: 31%;
     }
 }

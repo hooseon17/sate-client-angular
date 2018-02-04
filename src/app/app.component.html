@@ -1,5 +1,4 @@
 <body>
-  <!-- Header Showcase -->
   <header id="showcase" class="grid">
       <div class="bg-image"></div>
       <div class="content-wrap">
@@ -7,26 +6,49 @@
           <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Voluptates dolore delectus quia iure possimus laborum expedita
               ex inventore ea aliquid.</p>
           <input [(ngModel)]="food" placeholder="Search For Food..." id="first_name" type="text" class="validate">
+          <div>Radius<mat-slider [disabled]="disabled"
+            [invert]="invert"
+            [max]="max"
+            [min]="min"
+            [step]="step"
+            [thumb-label]="thumbLabel"
+            [tick-interval]="tickInterval"
+            [(ngModel)]="radius"
+            [vertical]="vertical"></mat-slider>{{radius}} m</div>
           <a href="#showcase" class="waves-effect waves-light btn orange" (click)="searchFood()">Search</a>
       </div>
   </header>
-  <div *ngIf="listAvailable">
-    <table id="section-a" class="bordered highlight ">
+  
+  <div *ngIf="listAvailable" id="section-a">
+    <agm-map [latitude]="lat" [longitude]="lng" [zoom]="14">
+        <agm-marker *ngFor="let n of list" [latitude]="n.lat" [longitude]="n.lng">
+          <agm-info-window>
+            <strong>{{n.name}}</strong>
+            <div>{{n.location}}</div>
+            <div>Distance: {{n.distance}} m</div>
+            <div>Rating: {{n.rating}}/5</div>
+            <div>{{n.open}}</div>
+          </agm-info-window>
+        </agm-marker>
+    </agm-map>
+    <table  class="bordered highlight">
       <thead>
         <tr>
             <th>Name</th>
             <th>Location</th>
             <th>Distance</th>
             <th>Rating</th>
+            <th>Open/Close</th>
         </tr>
       </thead>
   
       <tbody>
-        <tr *ngFor="let n of list">
+        <tr *ngFor="let n of list" (click)="launchMapUrl(n.location)">
           <td>{{n.name}}</td>
           <td>{{n.location}}</td>
-          <td>{{n.distance}}</td>
-          <td>{{n.rating}}</td>
+          <td>{{n.distance}} m</td>
+          <td>{{n.rating}}/5</td>
+          <td>{{n.open}}</td>
         </tr>
       </tbody>
     </table>
