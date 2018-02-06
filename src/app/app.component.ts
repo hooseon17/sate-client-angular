@@ -10,8 +10,8 @@ import {MatSlider} from '@angular/material';
 })
 export class AppComponent {
 
-  lat: any = 45.5036174;
-  lng: any = -73.5798482;
+  lat: any;
+  lng: any;
 
   autoTicks = false;
   disabled = false;
@@ -26,10 +26,17 @@ export class AppComponent {
   states = {
     START:"What do you feel like eating today?",
     CHECK:"Let me see what I can find.",
-    FOUND:"I found the following results, let me know if you would like anything else!",
-    UNSURE:"Sorry, I could not find any results from that, try typing specific food words separated by commas like 'Pizza, chicken' for example.",
+    FOUND:"Scroll down to see what I found for you, let me know if you would like anything else!",
+    UNSURE:"I couldn't find any food related words in your sentence, could you please rewrite just the food words separated by commas? I'm still learning!",
     ERROR:"Something went wrong, try again in a little bit."
 }
+
+  placeholders = {
+    START:"Try something like 'I would like to eat pizza but my buddy wants sushi'",
+    UNSURE:"For example 'pizza, sushi, chicken'"
+  }
+
+  placeholder = this.placeholders.START;
   chatbot = this.states.START;
 
 
@@ -55,8 +62,8 @@ export class AppComponent {
   
     "foodWords": [],
     "location": {
-      "lat":"45.5036174", 
-      "lng":"-73.5798482"
+      "lat":"", 
+      "lng":""
     },
     "radius": 1
   
@@ -66,8 +73,8 @@ export class AppComponent {
   
     "conversation": "",
     "location": {
-      "lat":"45.5036174", 
-      "lng":"-73.5798482"
+      "lat":"", 
+      "lng":""
     },
     "radius": 1
   
@@ -155,17 +162,23 @@ export class AppComponent {
 
   chat() {
     if (this.chatbot === this.states.START){
+      this.placeholder = this.placeholders.START;
       this.conversate();
     } else if (this.chatbot === this.states.CHECK) {
+      this.placeholder = this.placeholders.START;
       this.chatbot = this.states.FOUND;
     } else if (this.chatbot === this.states.FOUND) {
+      this.placeholder = this.placeholders.START;
       this.conversate();
     } else if (this.chatbot === this.states.UNSURE) {
+      this.placeholder = this.placeholders.START;
       this.searchFood();
     } else if (this.chatbot === this.states.ERROR) {
+      this.placeholder = this.placeholders.START;
       this.chatbot = this.states.START;
       this.conversate();
     } else {
+      this.placeholder = this.placeholders.START;
       alert('Something went seriously wrong')
     }
     this.food = "";
@@ -202,7 +215,10 @@ export class AppComponent {
     this.convo.location.lng = this.lng;
 
     this.http.post('http://sate.us-west-2.elasticbeanstalk.com/api/food/textConversation/', this.convo).map(res => res.json()).subscribe(data => {
-      if (data.length == 0) this.chatbot = this.states.UNSURE;
+      if (data.length == 0) {
+        this.chatbot = this.states.UNSURE;
+        this.placeholder = this.placeholders.UNSURE;
+      }
       else {
         this.chatbot = this.states.FOUND
         this.list = data;

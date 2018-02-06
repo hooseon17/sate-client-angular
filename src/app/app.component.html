@@ -2,9 +2,9 @@
   <header id="showcase" class="grid">
       <div class="bg-image"></div>
       <div class="content-wrap">
-          <img border="0" alt="SATE" src="../assets/SATE_LOGO.png" width="45%" height="45%" />
+          <img border="0" alt="SATE" src="./assets/SATE_LOGO.png" width="45%" height="45%" />
           <p><strong>{{chatbot}}</strong></p>
-          <input [(ngModel)]="food" placeholder="I would like to eat..." id="first_name" type="text" class="validate" (keyup.enter)="chat()">
+          <input [(ngModel)]="food" placeholder={{placeholder}} id="first_name" type="text" maxlength="100" class="validate" (keyup.enter)="chat()">
           <div><mat-slider [disabled]="disabled"
             [invert]="invert"
             [max]="max"
@@ -54,10 +54,4 @@
       </tbody>
     </table>
   </div>
-
-  <footer id="main-footer" class="grid">
-      <div>SateMchacks@gmail.com</div>
-      <div>Project By H&M</div>
-  </footer>
-  
   </body>
